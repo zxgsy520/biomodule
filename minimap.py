@@ -204,8 +204,9 @@ def create_minimap_task(genomes, name, read1, read2, sequencer, thread, job_type
         option=job_option,
         script="""
 export PATH={samtools}:{minimap}:$PATH
+samtools faidx {{genomes}}
 minimap2 {{temps}} -t {thread} {x} {{genomes}} {reads} \\
-|samtools view --threads {thread} -bS \\
+|samtools view --threads {thread} -bS -T {{genomes}}.fai \\
 |samtools sort --threads {thread} -m {memory}G -o {{prefix}}.sort.bam
 """.format(minimap=MINIMAP_BIN,
            samtools=SAMTOOLS_BIN,
