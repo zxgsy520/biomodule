@@ -192,7 +192,7 @@ def create_minimap_task(genomes, name, read1, read2, sequencer, thread, job_type
 
     temps = []
     for i in range(len(genomes)):
-        if split in "split":
+        if split=="split":
             temps.append("--split-prefix temp%s" % i)
         else:
             temps.append("")
