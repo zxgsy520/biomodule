@@ -261,8 +261,7 @@ def run_minimap(genome, name, read1, read2, sequencer, thread, job_type, work_di
     if job_type == "local":
         job_option = ""
     else:
-        job_option = "-pe smp %s" % thread
-
+        job_option = "-l vf=%sG -pe smp %s" % (str(thread*6) , thread)
     tasks, join_task, option, bam =  create_minimap_task(
         genomes=genomes,
         name=name,
